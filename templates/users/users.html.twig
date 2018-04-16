@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+{% block title %}Пользователи{% endblock %}
+{% block btn_users %}
+    <li class="active"><a href="{{ path('user.list') }}">Пользователи <span class="sr-only">(current)</span></a></li>
+{% endblock %}
+{% block section_title %}
+    Пользователи
+{% endblock %}
+{% block section_content %}
+
+    <table>
+
+    </table>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'u.id') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Имя', 'u.firstname') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Фамилия', 'u.surname') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Отчество', 'u.secondname') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Почта', 'u.email') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Статус', 'u.is_active') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Роль', 'u.roles') }}</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        {% for user in pagination  %}
+        <tbody>
+        <tr>
+            <td>{{ user.getId }}</td>
+            <td>{{ user.getFirstName }}</td>
+            <td>{{ user.getSurname }}</td>
+            <td>{{ user.getSecondname }}</td>
+            <td>{{ user.getEmail }}</td>
+            <td>
+                {% if user.getIsActive %}
+                    Активный
+                {% else %}
+                    Неактивный
+                {% endif %}
+            </td>
+            <td>
+                {% if user.getRoles=='ROLE_USER' %}
+                    Пользователь
+                {% else %}
+                    Админ
+                {% endif %}
+            </td>
+            <td>
+                {% if user.getIsActive %}
+                    <a class="btn btn-success btn-xs" href="{{ path('user.update.is_active', {'id': user.getId}) }}">
+                        <i class="glyphicon glyphicon-lock "></i>
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary btn-xs" href="{{ path('user.update.is_active', {'id': user.getId}) }}">
+                        <i class="glyphicon glyphicon-lock "></i>
+                    </a>
+                {% endif %}
+
+                <a class="btn btn-danger btn-xs" href="{{ path('user.delete', {'id': user.getId}) }}">
+                    <i class="glyphicon glyphicon-remove "></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% import 'answers/answer_detail.html.twig' as answerForm %}
+
+{{ form_start(form, {
+    'method': 'POST',
+    'attr': {novalidate:'novalidate'}
+}) }}
+{# render the task's only field: description #}
+{% if errors is defined %}
+    {% for error in errors %}
+        <span class="invalid-feedback d-block">
+            <span class="mb-0 d-block">
+                <span class="initialism form-error-icon badge badge-danger">Error</span>
+                <span class="form-error-message">{{ error }}</span>
+            </span>
+        </span>
+        <br>
+    {% endfor %}
+    <br>
+{% endif %}
+{{ form_label(form.text) }}
+<div id="question" class="input-group">
+    {{ form_widget(form.text) }}
+    <span class="input-group-addon">?</span>
+</div>
+<div class="form-group">
+    <label class="form-control-label required">Список ответов</label>
+</div>
+<ul class="answers list-group" data-prototype="{{ answerForm.answerDetail(form.answers.vars.prototype)|e('html_attr') }}">
+    {% for answer in form.answers %}
+        {{ answerForm.answerDetail(answer) }}
+    {% endfor %}
+</ul>
+<div class="form-group">
+    {{ form_widget(form.save, {
+        'attr': {'class': 'btn btn-success'},
+    }) }}
+</div>
+{{ form_rest(form) }}

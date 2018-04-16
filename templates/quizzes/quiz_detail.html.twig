@@ -1,0 +1,41 @@
+<div class="quiz">
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="quiz-tools">
+            <a class="btn btn-primary btn-xs" href="{{ path('quiz.update', {'id': quiz.id}) }}">
+                <i class="glyphicon glyphicon-pencil "></i>
+            </a>
+            <a class="btn btn-warning btn-xs" href="
+            {% if quiz.isActive %}
+                {{ path('quiz.disactivate', {'id': quiz.id}) }}
+            {% else %}
+                {{ path('quiz.activate', {'id': quiz.id}) }}
+            {% endif %}
+            ">
+                <i class="glyphicon glyphicon-lock "></i>
+            </a>
+            <a class="btn btn-danger btn-xs" href="{{ path('quiz.delete', {'id': quiz.id}) }}">
+                <i class="glyphicon glyphicon-remove "></i>
+            </a>
+        </div>
+    {% endif %}
+
+    {% if not quiz.isActive %}
+        <div class="disactive-layer">
+    {% endif %}
+
+    <div class="jumbotron">
+        <h3>{{ quiz.name }}</h3>
+        <p>{{ quiz.description }}</p>
+        <p><a class="btn btn-primary btn-lg"
+              {% if not quiz.isActive %}
+              disabled
+              {% else %}
+              href="{{ path('game.create', {'quizId': quiz.id}) }}"
+              {% endif %}
+              role="button">Старт</a></p>
+    </div>
+
+    {% if not quiz.isActive %}
+        </div>
+    {% endif %}
+</div>

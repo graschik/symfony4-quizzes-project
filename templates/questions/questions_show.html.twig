@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Вопросы{% endblock %}
+
+{% block btn_questions %}
+    <li class="active"><a href="{{ path('questions.show') }}">Вопросы <span class="sr-only">(current)</span></a></li>
+{% endblock %}
+
+{% block section_title %}
+    Вопросы
+{% endblock %}
+
+{% block section_content %}
+    <button type="button"
+            class="btn btn-success"
+            onclick="location.href = '{{ path('question.create') }}'">
+        Добавить вопрос
+    </button>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th width="5%">{{ knp_pagination_sortable(pagination, 'Id', 'u.id') }}</th>
+            <th width="85%">{{ knp_pagination_sortable(pagination, 'Вопрос', 'u.text') }}</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        {% for question in pagination  %}
+            <tbody>
+            <tr onclick="location.href = '{{ path('question.update',{'id': question.getId}) }}'" class="question-line">
+                <td>{{ question.getId }}</td>
+                <td>{{ question.getText }}</td>
+                <td>
+                    <a class="btn btn-success btn-xs">
+                        <i class="glyphicon glyphicon-pencil "></i>
+                    </a>
+                    <a class="btn btn-danger btn-xs" href="{{ path('question.delete',{'id': question.getId}) }}">
+                        <i class="glyphicon glyphicon-remove " ></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+
+{% endblock %}

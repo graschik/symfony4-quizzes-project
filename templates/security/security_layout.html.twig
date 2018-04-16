@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/forms.css') }}">
+{% endblock %}
+
+{% block section_content %}
+    <div class="clearfix section-content">
+
+        <div class="form-content .custom-form">
+        {% block form %}{% endblock %}
+        </div>
+
+        <div class="information-block">
+        {% block information %}{% endblock %}
+        </div>
+
+    </div>
+{% endblock %}

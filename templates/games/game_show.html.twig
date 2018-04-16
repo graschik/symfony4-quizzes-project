@@ -1,0 +1,21 @@
+{% extends 'games/game_layout.html.twig' %}
+
+{% block section_title %}Результат{% endblock %}
+
+{% block game_content %}
+    <div class="game-result">
+        {% if gameInfo.isCorrectCurrentAnswer %}
+            <h1>Поздравляем! Вы ответили правильно!</h1>
+        {% else %}
+            <h1>Вы ответили неверно... В следующий раз повезет ;)</h1>
+        {% endif %}
+        {% if gameId is defined %}
+            <a href="{{ path('game.play',{'gameId': gameId,'questionNumber': nextQuestion}) }}" class="btn btn-success">Следующий вопрос!</a>
+        {% else %}
+            {% if quizId is defined %}
+                <a href="{{ path('game.results',{'quizId': quizId}) }}" class="btn btn-success">Посмотреть результаты!</a>
+            {% endif %}
+
+        {% endif %}
+    </div>
+{% endblock %}

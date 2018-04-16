@@ -1,0 +1,48 @@
+
+{% extends 'security/security_layout.html.twig' %}
+
+{% block section_title %}Регистрация{% endblock %}
+
+{% block form %}
+    {{ form_start(form, {
+        'action': path('signup'),
+        'method': 'POST',
+        'attr':{novalidate:'novalidate'},
+    }) }}
+    <div class="form-group">
+        {{ form_row(form.firstname) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.surname) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.secondname) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.email) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.username) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.plainPassword) }}
+    </div>
+    {{ form_widget(form.confirm, {
+        'attr': {'class': 'btn btn-success'},
+    }) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block information %}
+    <div class="panel panel-info">
+        <div class="panel-heading">Обратите внимание</div>
+        <div class="panel-body">
+            <p>Уже имеет аккаунт? <a href="{{ path('login') }}">Войдите</a>.</p>
+            <p>После заполнения всех данных, на указанную вами почту придёт письмо с
+            ссылкой на подтверждение.</p>
+            <p>Помните, вы вводите личные данные, утеря которых может вызвать проблемы
+                со входом и другими функции на данном сервисе. Не предоставляйте никому
+                ваши данные и будьте осторожны при их вводе.</p>
+        </div>
+    </div>
+{% endblock %}

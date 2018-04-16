@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/quizzes.css') }}">
+{% endblock %}
+
+{% block section_content %}
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <button type="button"
+                class="btn btn-success"
+                onclick="location.href = '{{ path('quiz.create') }}'">
+            Добавить викторину
+        </button>
+    {% endif %}
+    <div class="quizzes">
+
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-warning col-lg-11">
+                <strong>{{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+        {% for quiz in quizzes %}
+            {% include('quizzes/quiz_detail.html.twig') %}
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

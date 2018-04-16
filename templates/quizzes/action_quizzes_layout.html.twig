@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/quizzes.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/questions.css') }}">
+{% endblock %}
+
+{% block section_title %}{% endblock %}
+
+{% block section_content %}
+    <div class="clearfix section-content">
+
+        <div class="form-content main-info">
+            {% block main_info %}
+                {% include('quizzes/action_quiz_detail.html.twig') %}
+            {% endblock %}
+        </div>
+
+        <div class="form-content answers-content">
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('build/js/quizzes.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'games/game_layout.html.twig' %}
+
+{% block section_title %}Ответьте на вопрос{% endblock %}
+
+{% block game_content %}
+        {{ form_start(form, {
+            'action': path('game.play',{'gameId': gameId,'questionNumber': questionNumber}),
+            'method': 'POST',
+            'attr':{novalidate:'novalidate'},
+        }) }}
+        <h2>Вопрос:</h2>
+        <h2>{{ question.getText }}</h2>
+        {% if errors is defined %}
+            {% for error in errors %}
+                <span class="invalid-feedback d-block">
+            <span class="mb-0 d-block">
+                <span class="initialism form-error-icon badge badge-danger">Error</span>
+                <span class="form-error-message">{{ error }}</span>
+            </span>
+        </span>
+                <br>
+            {% endfor %}
+            <br>
+        {% endif %}
+        {% for answer in answers %}
+            {% include('games/game_answer_detail.html.twig') %}
+        {% endfor %}
+        </ul>
+        {{ form_row(form.number) }}
+
+        {{ form_widget(form.save, {
+            'attr': {'class': 'btn btn-success'},
+        }) }}
+        {{ form_end(form) }}
+{% endblock %}

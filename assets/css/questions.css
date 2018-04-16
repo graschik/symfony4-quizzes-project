@@ -1,0 +1,31 @@
+.main-info{
+    margin-top: 20px;
+    width: 40%;
+}
+
+.answers-content{
+    margin: 47px 0 0 30px;
+    width: 40%;
+}
+
+#basic-addon1{
+    height: 10px;
+}
+
+.input-group .form-control{
+    margin-bottom: 0;
+}
+
+ul{
+    list-style: none;
+}
+ul > li{
+    margin-bottom: 5px;
+}
+.form-content input[type="text"]{
+    margin-bottom: 0;
+}
+
+#question{
+    margin-bottom: 50px;
+}

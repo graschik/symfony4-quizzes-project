@@ -1,0 +1,8 @@
+{% extends 'quizzes/show_quizzes_layout.html.twig' %}
+{% block title %}Мои викторины{% endblock %}
+
+{% block btn_my_quizzes %}
+    <li class="active"><a href="{{ path('quiz.own') }}">Мои викторины <span class="sr-only">(current)</span></a></li>
+{% endblock %}
+
+{% block section_title %}Мои викторины{% endblock %}

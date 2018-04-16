@@ -1,0 +1,53 @@
+{% import 'quizzes/question_detail.html.twig' as questionForm %}
+
+{{ form_start(form, {
+    'method': 'POST',
+    'attr': {novalidate:'novalidate'}
+}) }}
+{{ form_row(form._token) }}
+{# render the task's only field: description #}
+{% if errors is defined %}
+    {% for error in errors %}
+        <span class="invalid-feedback d-block">
+            <span class="mb-0 d-block">
+                <span class="initialism form-error-icon badge badge-danger">Error</span>
+                <span class="form-error-message">{{ error }}</span>
+            </span>
+        </span>
+        <br>
+    {% endfor %}
+    <br>
+{% endif %}
+{{ form_label(form.name) }}
+<div class="quiz-name form-group">
+    {{ form_widget(form.name) }}
+</div>
+{{ form_label(form.description) }}
+<div class="form-group">
+    {{ form_widget(form.description) }}
+</div>
+<div class="form-group">
+    <label class="form-control-label required">Список вопросов</label>
+</div>
+<ul class="questions list-group" data-prototype="{{ questionForm.questionDetail(form.questions.vars.prototype)|e('html_attr') }}">
+    {% for question in form.questions %}
+        {{ questionForm.questionDetail(question) }}
+    {% endfor %}
+</ul>
+<div class="sidebar-search">
+    <div class="form-group custom-search-form">
+        <input autocomplete="off" type="text" id="search" class="form-control" placeholder="Поиск вопросов...">
+    </div>
+    <!-- /input-group -->
+</div>
+<ul class="nav" id="side-menu">
+    <li>
+        <ul class="nav nav-second-level" id="entitiesNav">
+        </ul>
+    </li>
+</ul>
+<div class="form-group">
+    {{ form_widget(form.save, {
+        'attr': {'class': 'btn btn-success'},
+    }) }}
+</div>

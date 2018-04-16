@@ -1,0 +1,31 @@
+{% extends 'games/game_layout.html.twig' %}
+
+{% block section_title %}Результат{% endblock %}
+
+{% block game_content %}
+        <h3>Количество ваших правильных ответов: {{ thisUserResult }}</h3>
+        <h3>Ваше место: № {{ thisUserPosition }}</h3>
+        <h2>Топ-3 игроков в данной викторине:</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th width="8%">Место</th>
+                <th width="25%">Количество правильных ответов</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+            </tr>
+            </thead>
+            {% for user in users  %}
+                <tbody>
+                <tr>
+                    <td>№ {{ user.position|e }}</td>
+                    <td >{{ user.questionAnswered }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.surname }}</td>
+                    <td>{{ user.secondName }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+{% endblock %}

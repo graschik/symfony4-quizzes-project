@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/games.css') }}">
+{% endblock %}
+{% block section_title %}{% endblock %}
+
+{% block section_content %}
+    <div class="form-content">
+        {%  block game_content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('build/js/games.js') }}"></script>
+{% endblock %}

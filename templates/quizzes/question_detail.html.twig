@@ -1,0 +1,10 @@
+{% macro questionDetail(questionForm) %}
+    <li>
+        {{  form_errors(questionForm.text) }}
+        <div class="input-group">
+            <span class="input-group-addon number"></span>
+            {{ form_widget(questionForm.text) }}
+        </div>
+        {{ form_widget(questionForm.text) }}
+    </li>
+{% endmacro %}

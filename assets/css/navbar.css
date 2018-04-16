@@ -1,0 +1,31 @@
+@media (min-width: 768px){
+    .navbar {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+}
+
+.navbar-brand{
+    margin-right: 30px;
+}
+.dropdown-header{
+    padding-bottom: 0;
+}
+.dropdown-username{
+    padding-top: 0;
+    font-size: 16pt;
+}
+@media (min-width: 768px) {
+    .navbar-right{
+        margin-right: 30px;
+    } }
+@media (min-width: 992px) {
+    .navbar-right{
+        margin-right: 60px;
+    } }
+@media (min-width: 1200px) {
+    .navbar-right{
+        margin-right: 75px;
+    } }
+

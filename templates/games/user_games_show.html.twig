@@ -1,0 +1,39 @@
+{% extends 'games/game_layout.html.twig' %}
+
+{% block section_title %}Результат{% endblock %}
+
+{% block section_content %}
+    <div class="game-result">
+        <h2>Мои викторины</h2>
+        <table class="table table-striped">
+            {% for userGame in userGames %}
+                {% if userGame.getQuiz.getIsActive %}
+                    <tbody>
+                    <tr>
+                        <td width="10%">{{ userGame.getQuiz.getName }}</td>
+                        {% if not userGame.gameIsOver %}
+                            <td width="30%">
+                                {% if userGame.getNumberOfQuestionsAnswered %}
+                                    Текущий номер вопроса: № {{ userGame.getNumberOfQuestionsAnswered }}
+                                {% else %}
+                                    Текущий номер вопроса: № 1
+                                {% endif %}
+                            </td>
+                            <td width="10%">
+                                <a href="{{ path('game.play',{'gameId':userGame.getId, 'questionNumber':userGame.getCurrentQuestion.getId}) }}" class="btn btn-primary">Продолжить прохождение</a>
+                            </td>
+                        {% else %}
+                            <td width="30%">
+                                Были получены ответы на все вопросы
+                            </td>
+                            <td width="10%">
+                                <a href="{{ path('game.results',{'quizId':userGame.getQuiz.getId}) }}" class="btn btn-success">Посмотреть результаты</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
